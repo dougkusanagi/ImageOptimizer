@@ -9,6 +9,8 @@ $newwidth = $_POST['width'];
 $ext = $_POST['ext'];
 $ext = str_replace('image/', '', $ext);
 
+var_dump($ext);
+
 $name = $_POST['name'];
 $name = utf8_decode($name);
 $name = pathinfo($name, PATHINFO_FILENAME);
@@ -25,8 +27,6 @@ if(!is_dir($dir)){
 $image = imagecreatefromstring($data);
 list($width, $height) = getimagesizefromstring($data);
 $dst = imagecreatetruecolor($newwidth, $newwidth);
-
-var_dump($ext);
 
 // return;
 
