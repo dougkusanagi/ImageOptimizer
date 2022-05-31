@@ -66,7 +66,8 @@ function loadFilesToList(files, list, callback) {
 }
 
 function optimizeAllImages(images, i = 0) {
-    loadImage(images[i].url).then(img => {
+    loadImage(images[i].url)
+    .then(img => {
         return drawImage(img, 0, 0);
     }).then(() => {
         return saveDataUrl(images[i].name);
