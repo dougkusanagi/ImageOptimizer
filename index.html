@@ -31,7 +31,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="output-dir">Diretório de Saída</label>
-                            <input type="text" class="form-control" name="output-dir" id="output-dir" placeholder="Ex: C:\Users\dl_ag\Desktop\saida" value="C:\Users\dl_ag\Desktop\saida">
+                            <input type="text" class="form-control" id="output-dir" placeholder="Ex: C:\Users\dl_ag\Desktop\saida" value="C:\Users\dl_ag\Desktop\saida">
                             <small class="form-text text-muted">Diretório onde sairão as imagens</small>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="extension">Extensão</label>
-                            <select class="form-control" name="extension" id="extension">
+                            <select class="form-control" id="extension">
                                 <option value="image/jpeg">JPG</option>
                                 <option value="image/png">PNG</option>
                                 <option value="image/webp">WEBP</option>
@@ -51,7 +51,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="quality">Qualidade</label>
-                            <input type="number" class="form-control" name="quality" id="quality"
+                            <input type="number" class="form-control" id="quality"
                                 placeholder="Padrão: 0.92" step="0.1" max="1">
                             <small class="form-text text-muted">Qualidade da imagem</small>
                         </div>
@@ -60,13 +60,20 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="width">Largura</label>
-                            <input type="text" class="form-control" name="width" id="width" placeholder="Ex: 800" value="900">
+                            <input type="text" class="form-control" id="width" placeholder="Ex: 800" value="900">
                             <small class="form-text text-muted">Largura da imagem</small>
                         </div>
                     </div>
 
-                    <div class="col-md-6 d-flex align-items-center">
-                        <button name="start" id="start" class="btn btn-primary btn-block mb-3">Otimizar</button>
+                    <div class="col-md-6 d-flex flex-column align-items-center">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="saveWebpAsJpeg" value="1">
+                            Salvar WebP como JPEG
+                          </label>
+                        </div>
+
+                        <button name="start" id="start" class="btn btn-primary btn-block">Otimizar</button>
                     </div>
                 </div>
             </div>

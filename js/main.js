@@ -10,16 +10,23 @@ CANVAS.style.backgroundColor = '#fff';
 // Append canvas to body
 document.querySelector('#container-canvas').appendChild(CANVAS);
 
-function saveDataUrl(name) {
+function getParamsForm(name) {
     const form = new FormData();
     form.append('name', name);
     form.append('ext', document.querySelector('#extension').value);
     form.append('dir', document.querySelector('#output-dir').value);
     form.append('width', document.querySelector('#width').value);
+    form.append('saveWebpAsJpeg',
+        document.querySelector('#saveWebpAsJpeg').checked ? 1 : 0);
     form.append('data', CANVAS.toDataURL(
         document.querySelector('#extension').value,
         document.querySelector('#quality').value));
+    
+    return form;
+}
 
+function saveDataUrl(name) {
+    const form = getParamsForm(name);
     // Fetch save.php
     return fetch('save.php', {
         method: 'POST',
@@ -58,14 +65,24 @@ function loadFilesToList(files, list, callback) {
     callback();
 }
 
-function optimizeAllImages(images) {
-    images.forEach(image => {
-        loadImage(image.url).then(img => {
-            return drawImage(img, 0, 0);
-        })
-        .then(() => {
-            return saveDataUrl(image.name);
-        });
+function optimizeAllImages(images, i = 0) {
+    loadImage(images[i].url).then(img => {
+        return drawImage(img, 0, 0);
+    }).then(() => {
+        return saveDataUrl(images[i].name);
+    }).then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            alert(data.message);
+            return;
+        }
+
+        if (i < images.length - 1) {
+            optimizeAllImages(images, i + 1);
+            return;
+        }
+
+        alert('Todas as imagens foram otimizadas!');
     });
 }
 
